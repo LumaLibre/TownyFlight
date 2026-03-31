@@ -2,7 +2,6 @@ package com.gmail.llmdlio.townyflight.listeners;
 
 import io.canvasmc.canvas.event.EntityPostPortalAsyncEvent;
 import io.canvasmc.canvas.event.EntityTeleportAsyncEvent;
-import org.bukkit.PortalType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

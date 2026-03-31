@@ -5,7 +5,6 @@ import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
 
-import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,7 +34,6 @@ import com.gmail.llmdlio.townyflight.util.MetaData;
 import com.palmergames.bukkit.util.Version;
 
 public class TownyFlight extends JavaPlugin {
-	private static final Key CANVAS_BRAND_ID = Key.key("canvasmc", "canvas");
 	private static final Version requiredTownyVersion = Version.fromString("0.102.0.0");
 	private TownyFlightConfig config = new TownyFlightConfig(this);
 	private static TownyFlight plugin;
@@ -134,8 +132,11 @@ public class TownyFlight extends JavaPlugin {
 		pm.registerEvents(new TownStatusScreenListener(), this);
 		pm.registerEvents(new PlayerEnterTownListener(this), this);
 
-		if (ServerBuildInfo.buildInfo().isBrandCompatible(CANVAS_BRAND_ID)) {
+		try {
+			Class.forName("io.canvasmc.canvas.event.EntityTeleportAsyncEvent");
 			pm.registerEvents(new ExternalCanvasListener(playerTeleportListener), this);
+		} catch (ClassNotFoundException ignored) {
+			// Not a Canvas server
 		}
 
 		if (Settings.disableCombatPrevention)
