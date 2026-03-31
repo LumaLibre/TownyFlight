@@ -1,9 +1,12 @@
 package com.gmail.llmdlio.townyflight;
 
+import com.gmail.llmdlio.townyflight.listeners.ExternalCanvasListener;
 import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
 
+import io.papermc.paper.ServerBuildInfo;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -32,6 +35,7 @@ import com.gmail.llmdlio.townyflight.util.MetaData;
 import com.palmergames.bukkit.util.Version;
 
 public class TownyFlight extends JavaPlugin {
+	private static final Key CANVAS_BRAND_ID = Key.key("canvasmc", "canvas");
 	private static final Version requiredTownyVersion = Version.fromString("0.102.0.0");
 	private TownyFlightConfig config = new TownyFlightConfig(this);
 	private static TownyFlight plugin;
@@ -118,15 +122,21 @@ public class TownyFlight extends JavaPlugin {
 	public void registerEvents() {
 		final PluginManager pm = getServer().getPluginManager();
 
+		PlayerTeleportListener playerTeleportListener = new PlayerTeleportListener();
+
 		pm.registerEvents(new PlayerJoinListener(this), this);
 		pm.registerEvents(new PlayerLogOutListener(), this);
 		pm.registerEvents(new PlayerLeaveTownListener(this), this);
 		pm.registerEvents(new TownRemoveResidentListener(this), this);
 		pm.registerEvents(new TownUnclaimListener(this), this);
 		pm.registerEvents(new PlayerFallListener(), this);
-		pm.registerEvents(new PlayerTeleportListener(), this);
+		pm.registerEvents(playerTeleportListener, this);
 		pm.registerEvents(new TownStatusScreenListener(), this);
 		pm.registerEvents(new PlayerEnterTownListener(this), this);
+
+		if (ServerBuildInfo.buildInfo().isBrandCompatible(CANVAS_BRAND_ID)) {
+			pm.registerEvents(new ExternalCanvasListener(playerTeleportListener), this);
+		}
 
 		if (Settings.disableCombatPrevention)
 			pm.registerEvents(new PlayerPVPListener(), this);
