@@ -139,7 +139,7 @@ public class TownyFlight extends JavaPlugin {
 
 		try {
 			Class.forName("io.canvasmc.canvas.event.EntityTeleportAsyncEvent");
-			pm.registerEvents(new ExternalCanvasListener(playerTeleportListener), this);
+			pm.registerEvents(new ExternalCanvasListener(playerTeleportListener, this), this);
 		} catch (ClassNotFoundException ignored) {
 			// Not a Canvas server
 		}
