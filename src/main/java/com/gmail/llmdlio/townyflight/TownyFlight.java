@@ -1,6 +1,5 @@
 package com.gmail.llmdlio.townyflight;
 
-import com.gmail.llmdlio.townyflight.listeners.*;
 import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
@@ -12,7 +11,17 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
+import com.gmail.llmdlio.townyflight.listeners.PlayerEnterTownListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerFallListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerJoinListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerLeaveTownListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerLogOutListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerPVPListener;
+import com.gmail.llmdlio.townyflight.listeners.PlayerTeleportListener;
+import com.gmail.llmdlio.townyflight.listeners.TownRemoveResidentListener;
+import com.gmail.llmdlio.townyflight.listeners.TownStatusScreenListener;
+import com.gmail.llmdlio.townyflight.listeners.TownUnclaimListener;
+import com.gmail.llmdlio.townyflight.listeners.ExternalCanvasListener;
 import com.gmail.llmdlio.townyflight.command.TownToggleFlightCommandAddon;
 import com.gmail.llmdlio.townyflight.command.TownyFlightCommand;
 import com.gmail.llmdlio.townyflight.config.Settings;
