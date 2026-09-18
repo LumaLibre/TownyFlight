@@ -1,6 +1,6 @@
 package com.gmail.llmdlio.townyflight;
 
-import com.gmail.llmdlio.townyflight.listeners.ExternalCanvasListener;
+import com.gmail.llmdlio.townyflight.listeners.*;
 import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
@@ -69,7 +69,7 @@ public class TownyFlight extends JavaPlugin {
 		registerCommands();
 		getLogger().info("Towny version " + townyVersion + " found.");
 		getLogger().info(this.getPluginMeta().getDisplayName() + " by LlmDl Enabled.");
-		
+
 		cycleTimerTasksOn();
 		reGrantTempFlightToOnlinePlayer();
 	}
